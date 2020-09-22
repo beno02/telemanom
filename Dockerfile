@@ -12,11 +12,13 @@ WORKDIR /app
 
 RUN cd /app
 
-COPY . /app/telemanom
+RUN mkdir telemanom
 
 # TBD: It'd be better to mount this as a volume, on the host, so updates can be made
 RUN cd /app/telemanom && \
 curl -O https://s3-us-west-2.amazonaws.com/telemanom/data.zip && unzip data.zip && rm data.zip
+
+COPY . /app/telemanom
 
 RUN cd /app/telemanom && \
 pip install -r requirements.txt
